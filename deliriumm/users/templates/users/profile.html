@@ -1,0 +1,18 @@
+{% extends 'users/layout_1.html' %}
+
+{% block head %}
+
+<title>Perfil - Deliriumm Core</title>
+
+{% endblock head %}
+
+{% block body %}
+
+<h1>Perfil</h1>
+
+<p>Muestra mis datos publicos</p>
+<p>{{ user.first_name }}</p>
+
+<a href="{% url 'users:settings' %}">Editar mis datos</a>
+
+{% endblock body %}
