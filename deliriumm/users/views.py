@@ -24,6 +24,11 @@ def profile(request):
         "user": request.user
     })
 
+# /users/u/<username> IFNOT LOGIN REDIRECTO TO LOGIN // GET <USERNAME> IF NOT 404 //
+# 
+# USERP = REQUEST.USER --> PROFILE /
+# IFNOT RENDER PUBLIC PROFILE
+
 def public_profile(request, username):
     if not request.user.is_authenticated:
         return HttpResponseRedirect(reverse("users:login"))

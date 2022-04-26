@@ -1,0 +1,32 @@
+body {
+    font-family: sans-serif;
+    /* background-blend-mode:soft-light; */
+    background-color: grey;
+    background-position:unset;
+    color: white;
+    background-image: url(https://cdn.wallpapersafari.com/97/5/Bk0nvH.jpg);
+  }
+
+a, a:visited, a:hover, a:active {
+    color: inherit;
+}
+
+#deliriumm {
+    font-family: 'radwave', Arial, Helvetica, sans-serif;
+    color: white;
+}
+
+#message {
+    padding-bottom: 10px;
+    text-align: center;
+    color: white;
+    
+}
+@font-face {
+    font-family: 'radwave';
+    src: url('radwave.woff2') format('woff2'),
+         url('radwave.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
