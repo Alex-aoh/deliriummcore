@@ -251,7 +251,7 @@ def aprobar_request(request, requestid):
                 event=ticketrequest.event, price=ticketrequest.event.price, status_export = True)
                 ticketnew.save()
                 #export html
-                imgkit.from_url('0.0.0.0:80/core/tickets/t/export/' + hash, settings.MEDIA_ROOT + "tickets/" + hash +'.jpg')
+                imgkit.from_url('0.0.0.0:80/core/tickets/t/export/' + hash, settings.MEDIA_ROOT + "tickets/" + hash +'.jpg', options={'xvfb': ''})
 
 
 
