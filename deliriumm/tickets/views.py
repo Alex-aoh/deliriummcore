@@ -128,8 +128,8 @@ def delete_ticket_request(request, requestid):
         
         if request.POST.get('yes', False):
             tr = get_object_or_404(TicketRequest, pk=requestid)
-            if os.path.exists(settings.MEDIA_ROOT + "/" + str(tr.comprobante)):
-                    os.remove(settings.MEDIA_ROOT + "/" + str(tr.comprobante))
+            if os.path.exists(settings.MEDIA_ROOT + str(TicketRequest.objects.get(pk=requestid).comprobante)):
+                    os.remove(settings.MEDIA_ROOT + str(TicketRequest.objects.get(pk=requestid).comprobante))
             for ticket in tr.ticket_set.all():
                 if os.path.exists(settings.MEDIA_ROOT + "/  tickets/" + ticket.hash + '.jpg'):
                     os.remove(settings.MEDIA_ROOT + "/tickets/" + ticket.hash +'.jpg')
