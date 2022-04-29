@@ -31,7 +31,8 @@ ALLOWED_HOSTS = [
     '127.0.0.1',
     '192.168.1.74',
     '187.170.131.34',
-    'deliriummcore.ddns.net'
+    'deliriummcore.ddns.net',
+    '3.235.4.234'
 ]
 
 
