@@ -1,27 +1,29 @@
 body {
     font-family: sans-serif;
-    /* background-blend-mode:soft-light; */
-    background-color: grey;
-    background-position:unset;
+    background-color: black;
     color: white;
-    background-image: url(https://cdn.wallpapersafari.com/97/5/Bk0nvH.jpg);
   }
 
 a, a:visited, a:hover, a:active {
     color: inherit;
+    text-decoration: none;
 }
+
+.container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+}
+
 
 #deliriumm {
     font-family: 'radwave', Arial, Helvetica, sans-serif;
     color: white;
-}
-
-#message {
-    padding-bottom: 10px;
     text-align: center;
-    color: white;
-    
-}
+  }
+
+
 @font-face {
     font-family: 'radwave';
     src: url('radwave.woff2') format('woff2'),

@@ -21,12 +21,12 @@
             <li class="nav-item border-0">
                 <a class="nav-link" href="{% url 'tickets:create_request_view' %}">Crear Request</a>
             </li>
-            <li class="nav-item border-0">
+            {% comment %} <li class="nav-item border-0">
                 <a class="nav-link" href="">Ver mis Requests</a>
             </li>
             <li class="nav-item border-0">
                 <a class="nav-link" href="{% url 'tickets:index' %}">Generar Tickets</a>
-            </li>
+            </li> {% endcomment %}
             <li class="nav-item border-0">
                 <a class="nav-link" href="{% url 'tickets:my_tickets' %}">Todos mis Tickets</a>
             </li>

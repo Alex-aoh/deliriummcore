@@ -23,7 +23,7 @@ urlpatterns = [
     path("users/", include("users.urls")),
     path("core/", include("core.urls")),
     path("", include("mainpage.urls")),
-    path("core/tickets/", include("tickets.urls"))
+    path("core/tickets/", include("tickets.urls")),
 ]
 
 if settings.DEBUG:
