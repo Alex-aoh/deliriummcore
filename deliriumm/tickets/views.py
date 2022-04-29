@@ -133,7 +133,7 @@ def delete_ticket_request(request, requestid):
                 if os.path.exists(settings.MEDIA_ROOT + "/tickets/" + ticket.hash + '.jpg'):
                     os.remove(settings.MEDIA_ROOT + "/tickets/" + ticket.hash +'.jpg')
                 if os.path.exists(settings.MEDIA_ROOT + str(tr.comprobante)):
-                    os.remove(settings.MEDIA_ROOT + str(ticket.comprobante))
+                    os.remove(settings.MEDIA_ROOT + str(tr.comprobante))
 
             get_object_or_404(TicketRequest, pk=requestid).delete()
             return HttpResponseRedirect(reverse("tickets:index"))
