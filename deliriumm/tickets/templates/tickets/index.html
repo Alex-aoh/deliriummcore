@@ -1,0 +1,120 @@
+{% extends 'tickets/layout_1.html' %}
+
+{% block head %}
+{% load static %}
+
+<title>Tickets - Deliriumm Core</title>
+
+{% endblock %}
+
+{% block body %}
+
+<h1>Tickets</h1>
+
+{% if error_message %}
+<h3>{{ error_message }}</h3>
+{% endif %}
+
+<div class="card shadow mb-4 ">
+    <div class="card-body ">
+        <ul class="nav justify-content-center">
+            <li class="nav-item border-0">
+                <a class="nav-link" href="{% url 'tickets:create_request_view' %}">Crear Request</a>
+            </li>
+            <li class="nav-item border-0">
+                <a class="nav-link" href="">Ver mis Requests</a>
+            </li>
+            <li class="nav-item border-0">
+                <a class="nav-link" href="{% url 'tickets:index' %}">Generar Tickets</a>
+            </li>
+            <li class="nav-item border-0">
+                <a class="nav-link" href="{% url 'tickets:my_tickets' %}">Todos mis Tickets</a>
+            </li>
+            <li class="nav-item border-0">
+                <a class="nav-link" href="{% url 'tickets:request_view' last_ticket %}">Última Request visitada</a>
+            </li>
+            <li class="nav-item border-0">
+                <a class="nav-link" href="{% url 'tickets:index' %}">Soporte</a>
+            </li>
+
+        </ul>
+    </div>
+</div>
+
+
+<div class="row">
+
+    {% for ticket in ticketspe %}
+
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-primary shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-primary mb-1">
+                            <a href="{% url 'tickets:request_view' ticket.pk %}">Ticket Request #{{ ticket.pk }}</a></div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">Estado: {{ ticket.get_status_display }}</div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    {% endfor %}
+</div>
+
+<div class="row">
+
+    {% for ticket in ticketsap %}
+
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-primary shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-primary mb-1">
+                            <a href="{% url 'tickets:request_view' ticket.pk %}">Ticket Request #{{ ticket.pk }}</a></div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">Estado: {{ ticket.get_status_display }}</div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    {% endfor %}
+
+</div>
+
+<div class="row">
+
+    {% for ticket in ticketsre %}
+
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-primary shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-primary mb-1">
+                            <a href="{% url 'tickets:request_view' ticket.pk %}">Ticket Request #{{ ticket.pk }}</a></div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">Estado: {{ ticket.get_status_display }}</div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    {% endfor %}
+
+</div>
+
+
+{% endblock body %}

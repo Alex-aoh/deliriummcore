@@ -4,6 +4,7 @@ from django.urls import reverse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404
+from .models import UserCore
 
 
 
@@ -60,7 +61,9 @@ def login_view(request):
 
         if user is not None:
             login(request, user)
-            return HttpResponseRedirect(reverse("users:profile"))
+            if not UserCore.objects.filter(user=request.user):
+                uc = UserCore(user=request.user).save()
+            return HttpResponseRedirect(reverse("core:index"))
         else:
             return render(request, "users/login.html", {
                 "message": "Invalid credentials"

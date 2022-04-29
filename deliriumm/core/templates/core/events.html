@@ -1,0 +1,63 @@
+{% extends 'core/layout_1.html' %}
+
+{% block head %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'core/style_index.css' %}">
+<title>Eventos - Deliriumm Core</title>
+
+{% endblock %}
+
+{% block body %}
+
+<h1>Eventos</h1>
+
+<div class="card mb-4">
+
+    <!-- Card Header -->
+    <div class="card-header py-3">
+        <div class="row justify-content-between">
+            <div class="col-xl-4 col-md-6">
+                <h6 class="m-0 font-weight-bold text-primary">Eventos</h6>
+            </div>
+        </div>
+    </div>
+
+    {% for event in events %}
+
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-primary shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-primary mb-1">
+                            <a href="">Evento: {{ event.name }}</a></div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">Estado: {{ event.get_status_display }}</div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    {% endfor %}
+
+</div>
+
+
+<!-- Descripción Area -->
+
+{% comment %} <div class="card-header py-3">
+    <div class="text-start m-0 font-weight-bold text-primary">
+        Descripción
+    </div>
+</div>
+    <div class="card-body">
+        <p class="mb-0">{{ ticketrequest.context}}</p>
+    </div>
+</div>
+<div class="row"> {% endcomment %}
+
+
+{% endblock body %}

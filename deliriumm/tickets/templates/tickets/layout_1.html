@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        {% load static %}
+
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="{% static 'tickets/style_layout1.css' %}">
+        
+        {% block head %}
+        {% endblock %}
+
+    </head>
+    <body>
+      <header>
+
+        <ul class="nav justify-content-center">
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="{% url 'core:index' %}" id="deliriumm">Deliriumm</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Core</a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="{% url 'core:index' %}">Dashboard</a></li>
+                <li><a class="dropdown-item" href="{% url 'core:index' %}">Eventos</a></li>
+                <li><a class="dropdown-item" href="{% url 'core:index' %}">Soporte</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="{% url 'core:staff_view' %}">Staff</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="{% url 'core:admin_view' %}">Admin</a></li>
+              </ul>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'tickets:index' %}">Tickets</a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Mi Cuenta</a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item disabled" href="#">¡Hola, {{ user.first_name }}!</a></li>
+                  <li><a class="dropdown-item" href="{% url 'users:profile' %}">Perfil</a></li>
+                  <li><a class="dropdown-item" href="{% url 'users:settings' %}">Configuración</a></li>
+                  <li><hr class="dropdown-divider"></li>
+                  <li><a class="dropdown-item" href="{% url 'users:logout' %}">Log Out</a></li>
+                </ul>
+              </li>
+          </ul>
+
+    </header>
+
+        <div class="container">
+        {% block body %}
+        
+        {% endblock body %}
+      </div>
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
+    </body>
+</html>

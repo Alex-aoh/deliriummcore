@@ -1,0 +1,25 @@
+{% extends 'core/layout_1.html' %}
+
+{% block head %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'core/style_index.css' %}">
+<title>Inicio - Deliriumm Core</title>
+
+{% endblock %}
+
+{% block body %}
+
+<h1>CORE</h1>
+
+<p>¡Bienvenid@, {{ user.first_name }}!</p>
+
+{% if error_message %}
+<h3>{{ error_message }}</h3>
+{% endif %}
+
+<div class="row">
+
+</div>
+
+
+{% endblock body %}

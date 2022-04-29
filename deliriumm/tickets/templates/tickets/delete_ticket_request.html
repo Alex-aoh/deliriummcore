@@ -1,0 +1,36 @@
+{% extends 'tickets/layout_1.html' %}
+
+{% block head %}
+{% load static %}
+<title>Delete Ticket Request #{{ requestid }}? - Deliriumm Core</title>
+
+{% endblock %}
+
+{% block body %}
+
+{% if error_message %}
+<h3>{{ error_message }}</h3>
+{% endif %}
+
+<h3>¿Seguro de borrar el Ticket Request #{{ requestid }}?</h3>
+
+<div class="container mt-4">
+    <div class="row justify-content-start">
+        <div class="col-1">
+            <form action="" method="post">
+                {% csrf_token %}
+                <input type="submit" name="yes" class="btn btn-danger btn-lg" value="Si" />
+            </form>
+        </div>
+        <div class="col-1">
+            <form action="" method="post">
+                {% csrf_token %}
+                <input type="submit" name="not" class="btn btn-danger btn-lg" value="No" />
+            </form>
+        </div>
+    </div>
+
+</div>
+
+
+{% endblock body %}
