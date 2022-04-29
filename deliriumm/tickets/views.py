@@ -132,7 +132,7 @@ def delete_ticket_request(request, requestid):
             for ticket in tr.ticket_set.all():
                 if os.path.exists(settings.MEDIA_ROOT + "/tickets/" + ticket.hash + '.jpg'):
                     os.remove(settings.MEDIA_ROOT + "/tickets/" + ticket.hash +'.jpg')
-                if os.path.exists(settings.MEDIA_ROOT + str(ticket.comprobante)):
+                if os.path.exists(settings.MEDIA_ROOT + str(tr.comprobante)):
                     os.remove(settings.MEDIA_ROOT + str(ticket.comprobante))
 
             get_object_or_404(TicketRequest, pk=requestid).delete()
