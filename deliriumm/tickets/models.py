@@ -1,3 +1,4 @@
+from asyncio.unix_events import _UnixSelectorEventLoop
 from numbers import Integral
 from sys import maxsize
 from tokenize import blank_re
@@ -21,6 +22,8 @@ class TicketRequest(models.Model):
     total = models.IntegerField(verbose_name="Total", default="0")
     created = models.DateTimeField(auto_now=True)
     staff_asigned = models.CharField(max_length=30, default="none")
+
+    comprobante = models.FileField(upload_to='uploads/comprobantes/', blank=True)
 
     PAYMENTS = ( 
         ("CASH", "Efectivo"), 
@@ -55,6 +58,7 @@ class Ticket(models.Model):
     hash = models.CharField(primary_key=True, verbose_name="Hash Id", max_length=200)
     client = models.CharField(max_length=50)
     ticketrequest = models.ForeignKey(TicketRequest, on_delete=models.CASCADE)
+
 
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     event = models.ForeignKey(Event, on_delete=models.CASCADE)

@@ -43,6 +43,7 @@
 
                   <div class="input-group mb-3">
                     <label class="input-group-text">Metódo de Pago</label>
+                    
 
                     <select name="payment_method" class="form-select me-1" id="payment_method">
                       <option selected value="CASH">Efectivo</option>
@@ -57,6 +58,13 @@
                   <div class="mb-3">
                     <label class="form-label">Comentarios</label>
                     <textarea class="form-control" name="context" id="context" rows="3"></textarea>
+                  </div>
+
+                  <div class="input-group mb-3">
+                    <div class="mb-3">
+                      <label for="formFile" class="form-label">Comprobante</label>
+                      <input class="form-control" name="comprobante" type="file" id="formFile">
+                    </div>
                   </div>
 
                   {% comment %} <div class="mb-3">

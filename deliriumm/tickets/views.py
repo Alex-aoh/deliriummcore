@@ -84,18 +84,39 @@ def create_request_view(request):
 #--------------------------------------------------------------------
 
 
+def handle_comprobante_upload(f):
+    with open(settings.MEDIA_ROOT + "comprobantes/" + f.name, 'wb+' ) as destination:
+        for chunk in f.chunks():
+            destination.write(chunk)
+
+
+def ticketCreate(request, event, totalp):
+    if not request.POST["payment_method"] == "CASH":
+        t = TicketRequest(user=request.user, event=event, context=request.POST["context"], 
+        q_tickets=int(request.POST["q_tickets"]), reference=request.POST["reference"], 
+        client=request.POST["client"], total=totalp, payment_method=request.POST["payment_method"], comprobante=request.FILES["comprobante"])
+        return t
+    elif request.POST["payment_method"] == "CASH":
+        t = TicketRequest(user=request.user, event=event, context=request.POST["context"], 
+        q_tickets=int(request.POST["q_tickets"]), reference=request.POST["reference"], 
+        client=request.POST["client"], total=totalp, payment_method=request.POST["payment_method"])
+        return t
 #--------------------------------------------------------------------
 def new_ticket_request(request):
     if not request.user.is_authenticated:
         return HttpResponseRedirect(reverse("users:login"))
     event = get_object_or_404(Event, status="VE")
-    totalp = int(request.POST["q_tickets"])*event.price
+    if request.POST["q_tickets"]:
+        totalp = int(request.POST["q_tickets"])*event.price
+    else:
+        totalp=0
+    
+
+
     try:
-        t = TicketRequest(user=request.user, event=event, context=request.POST["context"], 
-    q_tickets=int(request.POST["q_tickets"]), reference=request.POST["reference"], 
-    client=request.POST["client"], total=totalp, payment_method=request.POST["payment_method"])
+        t = ticketCreate(request=request, event=event, totalp=totalp)
     except (BaseException):
-        return render(request, "tickets/create_request",
+        return render(request, "tickets/create_request.html",
         {
             "error_message": "¡Ha occurído un error!",
             "event": event
