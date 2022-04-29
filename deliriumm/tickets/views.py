@@ -84,11 +84,6 @@ def create_request_view(request):
 #--------------------------------------------------------------------
 
 
-def handle_comprobante_upload(f):
-    with open(settings.MEDIA_ROOT + "comprobantes/" + f.name, 'wb+' ) as destination:
-        for chunk in f.chunks():
-            destination.write(chunk)
-
 
 def ticketCreate(request, event, totalp):
     if not request.POST["payment_method"] == "CASH":
@@ -110,8 +105,6 @@ def new_ticket_request(request):
         totalp = int(request.POST["q_tickets"])*event.price
     else:
         totalp=0
-    
-
 
     try:
         t = ticketCreate(request=request, event=event, totalp=totalp)
@@ -139,7 +132,8 @@ def delete_ticket_request(request, requestid):
             for ticket in tr.ticket_set.all():
                 if os.path.exists(settings.MEDIA_ROOT + "/tickets/" + ticket.hash + '.jpg'):
                     os.remove(settings.MEDIA_ROOT + "/tickets/" + ticket.hash +'.jpg')
-
+                if os.path.exists(settings.MEDIA_ROOT + str(ticket.comprobante)):
+                    os.remove(settings.MEDIA_ROOT + str(ticket.comprobante))
 
             get_object_or_404(TicketRequest, pk=requestid).delete()
             return HttpResponseRedirect(reverse("tickets:index"))
@@ -174,6 +168,7 @@ def admin_request_view(request, requestid):
             "requestid": requestid,
             "ticketrequest": ticketrequest,
             "status_display": status_display,
+            "ticketslist": Ticket.objects.filter(ticketrequest=requestid)
         })
     else:
         return HttpResponseRedirect(reverse("tickets:request_view", args=(requestid,)))
@@ -251,6 +246,7 @@ def aprobar_request(request, requestid):
                 event=ticketrequest.event, price=ticketrequest.event.price, status_export = True)
                 ticketnew.save()
                 #export html
+                #options={'xvfb': ''}
                 imgkit.from_url('0.0.0.0:80/core/tickets/t/export/' + hash, settings.MEDIA_ROOT + "tickets/" + hash +'.jpg', options={'xvfb': ''})
 
 
