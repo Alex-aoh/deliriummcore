@@ -1,0 +1,53 @@
+{% extends 'core/layout_1.html' %}
+
+{% block head %}
+{% load static %}
+<title>Subir Material - Deliriumm Core</title>
+
+{% endblock %}
+
+{% block body %}
+
+<h1>Subir Material</h1>
+
+
+{% if error_message %}
+<h3>{{ error_message }}</h3>
+{% endif %}
+
+
+    <div class="card mb-4">
+        <div class="card-header py-3">
+            <div class="row justify-content-between">
+                <div class="col-xl-4 col-md-6">
+                    <h6 class="m-0 font-weight-bold text-primary">{{ event.name }}</h6>
+                </div>
+                <div class="col-xl-3 col-md-6">
+                    <div class="text-end ">
+                        <a href="{% url 'core:admin_view' %}"><button class="btn btn-secondary btn-sm">Regresar</button></a></div>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+
+{% comment %} {% url 'tickets:newticketrequest' %} {% endcomment %}
+
+            <form action="" enctype="multipart/form-data" method="post">
+                {% csrf_token %}
+                  <div class="mb-3">
+                    <label class="form-label">Descripción</label>
+                    <textarea class="form-control" name="description" id="context" rows="3"></textarea>
+                  </div>
+
+                  <div class="input-group mb-3">
+                    <div class="mb-3">
+                      <label for="formFile" class="form-label">Material</label>
+                      <input class="form-control" name="material" type="file" id="formFile">
+                    </div>
+                  </div>
+
+                  <button type="submit" class="btn btn-primary text-center">Crear</button>
+            </form>
+        </div>
+    </div>
+{% endblock body %}
