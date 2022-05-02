@@ -17,9 +17,76 @@
 <h3>{{ error_message }}</h3>
 {% endif %}
 
-<div class="row">
+    {% if event %}
+    <div class="card mb-4">
+        <!-- Card Header -->
+        <div class="card-header py-3">
+            <div class="row justify-content-between">
+                <div class="col-xl-4 col-md-6">
+                    <h6 class="m-0 font-weight-bold text-primary">Evento: {{ event.name }} <mark>Estado: {{ event.get_status_display }}</mark></h6>
+                </div>
+                <div class="col-xl-3 col-md-6">
+                    <div class="text-end ">
+                        <a href=""><button type="button" class="btn btn-warning btn-sm">Admin</button></a>
+                        <a href=""><button type="button" class="btn btn-danger btn-sm">Borrar Request</button></a>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
 
-</div>
+
+    <div class="row">
+            {% comment %} col-xl-4 tamaño main {% endcomment %}
+        <div class="col-xl-4 col-md-6 mb-4">
+            <div class="card border-left-primary shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-primary mb-1">
+                                Información del evento</div>
+                            <div class="p mb-0 text-gray-800">
+                                {{ event.datetime }}
+                            </div>
+                            <div class="p mb-0 text-gray-800">
+                                <a href="{{ event.locationmapslink }}" target="_blank" rel="noopener noreferrer">Ubicación</a>
+                            </div>
+                            <div class="p mb-0 text-gray-800">
+                                Precio: {{ event.price }} MXN
+                            </div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-4 col-md-6 mb-4">
+            <div class="card border-left-primary shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-primary mb-1">
+                                Materiales</div>
+                            {% for material in event.material_set.all %}
+                            <div class="p mb-0 text-gray-800">
+                                <a href="{% url 'core:dowload_material' material.pk %}" target="_blank" rel="noopener noreferrer">{{material.description}}</a>
+                            </div>
+                            {% endfor %}
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% endif %}
+
 
 
 {% endblock body %}
