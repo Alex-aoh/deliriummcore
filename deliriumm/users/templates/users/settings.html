@@ -10,7 +10,38 @@
 
 <h1>Configuración</h1>
 
-<p>Muestra datos personales con la opcion de editarlos</p>
+<p>Editar datos personales</p>
 
+{% if message %}
+<div class="alert alert-success" role="alert">
+  {{ message }}
+</div>
+{% endif %}
+  
+<form action="" method="post"> 
+  {% csrf_token %}
+  <div class="input-group mb-3">
+    <span class="input-group-text" id="basic-addon1">@</span>
+    <input type="text" name="username" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" value="{{ user.username }}">
+  </div>
+  <div class="input-group mb-3">
+    <span class="input-group-text" id="basic-addon1">Email</span>
+    <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value="{{ user.email }}">
+  </div>
+  
+  <div class="input-group mb-3">
+    <span class="input-group-text" id="basic-addon1">Nombre</span>
+    <input type="text" name="first_name" class="form-control" placeholder="Nombre" aria-label="Nombre" aria-describedby="basic-addon1" value="{{ user.first_name }}">
+  </div>
+
+  <div class="input-group mb-3">
+    <span class="input-group-text" id="basic-addon1">Apellidos</span>
+    <input type="text" name="last_name" class="form-control" placeholder="Apellidos" aria-label="Apellidos" aria-describedby="basic-addon1" value="{{ user.last_name }}">
+  </div>
+
+  <button type="submit" class="btn btn-primary text-center">Guardar</button>
+</form>
+
+  
 
 {% endblock body %}

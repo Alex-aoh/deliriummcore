@@ -10,8 +10,10 @@
 
 <h1>Perfil</h1>
 
-<p>Muestra mis datos publicos</p>
-<p>{{ user.first_name }}</p>
+<h4>Nombre: {{ user.first_name }}</h4>
+<h4>Apellidos: {{ user.last_name }}</h4>
+<h4>Username: {{ user.username }}</h4>
+<h4>Correo: {{ user.email }}</h4>
 
 <a href="{% url 'users:settings' %}">Editar mis datos</a>
 

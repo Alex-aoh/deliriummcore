@@ -16,3 +16,9 @@ class UserCore(models.Model):
         )
     last_ticket_request_see = models.IntegerField(verbose_name="Última Ticket Request visitada", default=0)
 # Add other custom permissions according to need.
+
+class RegToken(models.Model):
+    username = models.CharField(max_length=50, primary_key=True)
+    token = models.CharField(max_length=20)
+
+    

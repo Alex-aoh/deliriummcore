@@ -67,7 +67,8 @@ def request_view(request, requestid):
             "requestid": requestid,
             "ticketrequest": ticketrequest,
             "status_display": status_display,
-            "ticketslist": Ticket.objects.filter(ticketrequest=requestid)
+            "ticketslist": Ticket.objects.filter(ticketrequest=requestid),
+            "comments": ticketrequest.commentticketrequest_set.all()
         }) 
 
 
@@ -125,14 +126,15 @@ def delete_ticket_request(request, requestid):
     if not request.user.is_authenticated:
         return HttpResponseRedirect(reverse("users:login"))
     if request.POST:
-        
         if request.POST.get('yes', False):
             tr = get_object_or_404(TicketRequest, pk=requestid)
-            if os.path.exists(settings.MEDIA_ROOT + str(TicketRequest.objects.get(pk=requestid).comprobante)):
-                    os.remove(settings.MEDIA_ROOT + str(TicketRequest.objects.get(pk=requestid).comprobante))
             for ticket in tr.ticket_set.all():
-                if os.path.exists(settings.MEDIA_ROOT + "/  tickets/" + ticket.hash + '.jpg'):
+                if os.path.exists(settings.MEDIA_ROOT + "/tickets/" + ticket.hash + '.jpg'):
                     os.remove(settings.MEDIA_ROOT + "/tickets/" + ticket.hash +'.jpg')
+            if tr.comprobante:
+                if os.path.exists(settings.MEDIA_ROOT + str(tr.comprobante)):
+                    os.remove(settings.MEDIA_ROOT + str(tr.comprobante))
+
 
 
             get_object_or_404(TicketRequest, pk=requestid).delete()
@@ -168,7 +170,8 @@ def admin_request_view(request, requestid):
             "requestid": requestid,
             "ticketrequest": ticketrequest,
             "status_display": status_display,
-            "ticketslist": Ticket.objects.filter(ticketrequest=requestid)
+            "ticketslist": Ticket.objects.filter(ticketrequest=requestid),
+            "comments": ticketrequest.commentticketrequest_set.all()
         })
     else:
         return HttpResponseRedirect(reverse("tickets:request_view", args=(requestid,)))
@@ -247,7 +250,7 @@ def aprobar_request(request, requestid):
                 ticketnew.save()
                 #export html
                 #options={'xvfb': ''}
-                imgkit.from_url('0.0.0.0:80/core/tickets/t/export/' + hash, settings.MEDIA_ROOT + "tickets/" + hash +'.jpg', options={'xvfb': ''})
+                imgkit.from_url('0.0.0.0:80/core/tickets/t/export/' + hash, settings.MEDIA_ROOT + "tickets/" + hash +'.jpg')
 
 
 

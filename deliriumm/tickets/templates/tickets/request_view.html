@@ -99,7 +99,7 @@
                             {% endif %}
                             {% if not ticketrequest.payment_method == "CASH" %}
                             <div class="p mb-0 text-gray-800">
-                                Comprobante: <a href="/media/{{ticketrequest.comprobante}}" target="_blank" rel="noopener noreferrer"">Ver Comprobante</a>
+                                Comprobante: <a href="/media/{{ticketrequest.comprobante}}" target="_blank" rel="noopener noreferrer">Ver Comprobante</a>
                             </div>
                            {% endif %}
                             <div class="p mb-0 text-gray-800">
@@ -202,14 +202,21 @@
     </div>
 
 
-<!-- For Loop Comments (conv) -->
 
-    {% comment %} <div class="card shadow mb-4">
-         <div class="card-body">
-            <h6>Contexto</h6>
-            <p class="mb-0">Mas info</p>
-        </div>
-    </div> {% endcomment %}
+
+<!-- For Loop Comments (conv) -->
+{% if comments %}
+<div class="card mb-4">
+{% for comment in comments %}
+     <div class="card-body">
+            <h6>@{{ comment.user.username }}</h6>
+            <p class="mb-0">{{ comment.text }}</p>
+    </div>
+{% endfor %}
+    </div>
+{% endif %}
+
+
 
 
 {% endblock body %}
