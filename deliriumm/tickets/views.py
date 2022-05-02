@@ -74,6 +74,7 @@ def request_view(request, requestid):
 
 #--------------------------------------------------------------------
 
+
 #--------------------------------------------------------------------
 def create_request_view(request):
     if not request.user.is_authenticated:
@@ -85,7 +86,7 @@ def create_request_view(request):
 #--------------------------------------------------------------------
 
 
-
+#--------------------------------------------------------------------
 def ticketCreate(request, event, totalp):
     if not request.POST["payment_method"] == "CASH":
         t = TicketRequest(user=request.user, event=event, context=request.POST["context"], 
@@ -97,7 +98,7 @@ def ticketCreate(request, event, totalp):
         q_tickets=int(request.POST["q_tickets"]), reference=request.POST["reference"], 
         client=request.POST["client"], total=totalp, payment_method=request.POST["payment_method"])
         return t
-#--------------------------------------------------------------------
+
 def new_ticket_request(request):
     if not request.user.is_authenticated:
         return HttpResponseRedirect(reverse("users:login"))
@@ -177,7 +178,9 @@ def admin_request_view(request, requestid):
         return HttpResponseRedirect(reverse("tickets:request_view", args=(requestid,)))
 #--------------------------------------------------------------------
 
-#     TICKETS
+#--------------------------------------------------------------------
+# -- TICKETS -- 
+#--------------------------------------------------------------------
 
 #--------------------------------------------------------------------
 def temp_ticket_export(request, hash):
@@ -265,6 +268,7 @@ def aprobar_request(request, requestid):
     else:
         return HttpResponseRedirect(reverse("tickets:request_view", args=(requestid,)))
 
+
 def hashTicket(event, user, request, id):
     request = str(request)
     id = str(id)
@@ -275,9 +279,6 @@ def hashTicket(event, user, request, id):
     h.update(id.encode('utf-8'))
 
     return h.hexdigest()
-
-
-
 
 
 def rechazar_request(request, requestid):
@@ -295,6 +296,7 @@ def rechazar_request(request, requestid):
     else:
         return HttpResponseRedirect(reverse("tickets:request_view", args=(requestid,)))
 
+
 def archivar_request(request, requestid):
     if not request.user.is_authenticated:
         return HttpResponseRedirect(reverse("users:login"))
@@ -309,6 +311,7 @@ def archivar_request(request, requestid):
         return HttpResponseRedirect(reverse("tickets:admin_request_view", args=(requestid,)))
     else:
         return HttpResponseRedirect(reverse("tickets:request_view", args=(requestid,)))
+
 
 def asignar_request(request, requestid):
     if not request.user.is_authenticated:

@@ -1,0 +1,220 @@
+{% extends 'core/layout_1.html' %}
+
+{% block head %}
+{% load static %}
+
+<title>Admin - Deliriumm Core</title>
+
+{% endblock %}
+
+{% block body %}
+
+<h1>Admin</h1>
+
+<div class="card mb-4">
+    <!-- Card Header -->
+    <div class="card-header py-3">
+        <div class="row justify-content-between">
+            <div class="col-xl-4 col-md-6">
+                <div class="text-xs font-weight-bold text-primary mb-1">
+                    Materiales
+                </div>
+            </div>
+
+            <div class="col-xl-3 col-md-6">
+                <div class="text-end ">
+                    <a href=""><button type="button" class="btn btn-primary btn-sm">Subir Material</button></a>
+                    
+                </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    {% for material in event.material_set.all %}
+    
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-primary shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-primary mb-1">
+                                Material #{{ material.pk }}</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ material.description }}</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800"><a href="{% url 'core:dowload_material' material.pk %}">Descargar</a></div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800"><a href="{% url 'core:delete_material' material.pk %}">Borrar</a></div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+    
+    
+    {% endfor %}
+    </div>
+    
+
+
+
+
+
+<div class="card mb-4">
+    <!-- Card Header -->
+    <div class="card-header py-3">
+        <div class="row justify-content-between">
+            <div class="text-xs font-weight-bold text-primary mb-1">
+                Ticket Request - Pendiente
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<div class="row">
+{% for ticket in tickets_pe %}
+
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-primary shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-primary mb-1">
+                            <a href="{% url 'tickets:request_view' ticket.pk %}">Ticket Request #{{ ticket.pk }}</a></div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">Estado: {{ ticket.get_status_display }}</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">Usuario: @{{ ticket.user.username }}</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">Asignado: @{{ ticketrequest.staff_asigned }}</div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+{% endfor %}
+</div>
+
+<div class="card mb-4">
+    <!-- Card Header -->
+    <div class="card-header py-3">
+        <div class="row justify-content-between">
+            <div class="text-xs font-weight-bold text-primary mb-1">
+                Ticket Request - Rechazado
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    {% for ticket in tickets_re %}
+    
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-primary shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-primary mb-1">
+                                <a href="{% url 'tickets:request_view' ticket.pk %}">Ticket Request #{{ ticket.pk }}</a></div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">Estado: {{ ticket.get_status_display }}</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">Usuario: @{{ ticket.user.username }}</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">Asignado: @{{ ticket.staff_asigned }}</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+    
+    
+    {% endfor %}
+    </div>
+
+    <div class="card mb-4">
+        <!-- Card Header -->
+        <div class="card-header py-3">
+            <div class="row justify-content-between">
+                <div class="text-xs font-weight-bold text-primary mb-1">
+                    Ticket Request - Aprobado
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row">
+        {% for ticket in tickets_va %}
+        
+            <div class="col-xl-3 col-md-6 mb-4">
+                <div class="card border-left-primary shadow h-100 py-2">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-primary mb-1">
+                                    <a href="{% url 'tickets:request_view' ticket.pk %}">Ticket Request #{{ ticket.pk }}</a></div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">Estado: {{ ticket.get_status_display }}</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">Usuario: @{{ ticket.user.username }}</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">Asignado: @{{ ticket.staff_asigned }}</div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+        
+        
+        {% endfor %}
+        </div>
+
+        <div class="card mb-4">
+    <!-- Card Header -->
+    <div class="card-header py-3">
+        <div class="row justify-content-between">
+            <div class="text-xs font-weight-bold text-primary mb-1">
+                Ticket Request - Archivado
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    {% for ticket in tickets_ar %}
+    
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-primary shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-primary mb-1">
+                                <a href="{% url 'tickets:request_view' ticket.pk %}">Ticket Request #{{ ticket.pk }}</a></div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">Estado: {{ ticket.get_status_display }}</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">Usuario: @{{ ticket.user.username }}</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">Asignado: @{{ ticket.staff_asigned }}</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+    
+    
+    {% endfor %}
+    </div>
+
+{% endblock body %}
