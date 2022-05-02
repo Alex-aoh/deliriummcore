@@ -28,8 +28,6 @@
                 <div class="col-xl-3 col-md-6">
                     <div class="text-end ">
                         <a href=""><button type="button" class="btn btn-warning btn-sm">Admin</button></a>
-                        <a href=""><button type="button" class="btn btn-danger btn-sm">Borrar Request</button></a>
-                        
                     </div>
                 </div>
             </div>
@@ -72,7 +70,7 @@
                                 Materiales</div>
                             {% for material in event.material_set.all %}
                             <div class="p mb-0 text-gray-800">
-                                <a href="{% url 'core:dowload_material' material.pk %}" target="_blank" rel="noopener noreferrer">{{material.description}}</a>
+                                <a href="{% url 'core:dowload_material' material.pk %}" target="_blank" rel="noopener noreferrer">- {{material.description}}</a>
                             </div>
                             {% endfor %}
                         </div>
