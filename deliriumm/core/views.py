@@ -92,6 +92,36 @@ def staff_view(request):
 #--------------------------------------------------------------------
 
 
+#--------------------------------------------------------------------
+def materialCreate(request, event):
+    m = Material(description=request.POST['description'], file=request.FILES['material'], event=event)
+    return m
+
+
+def upload_material(request):
+    if not request.user.is_authenticated:
+        return HttpResponseRedirect(reverse("users:login"))
+    event = get_object_or_404(Event, status="VE")
+    if request.POST:
+        try:
+            m = materialCreate(request=request, event=event)
+        except (BaseException):
+            return render(request, "core/admin/upload_material.html",
+            {
+                "error_message": "¡Ha occurído un error!",
+                "event": event
+            })
+        else:
+            m.save()
+            return HttpResponseRedirect(reverse("core:admin_view"))
+    else:
+        return render(request, "core/admin/upload_material.html", {
+            "event": event,
+        })
+#--------------------------------------------------------------------
+        
+
+
 
 
 

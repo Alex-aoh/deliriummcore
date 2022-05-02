@@ -23,40 +23,38 @@
 
             <div class="col-xl-3 col-md-6">
                 <div class="text-end ">
-                    <a href=""><button type="button" class="btn btn-primary btn-sm">Subir Material</button></a>
-                    
-                </div>
-        </div>
-    </div>
-</div>
-
-<div class="row">
-    {% for material in event.material_set.all %}
-    
-        <div class="col-xl-3 col-md-6 mb-4">
-            <div class="card border-left-primary shadow h-100 py-2">
-                <div class="card-body">
-                    <div class="row no-gutters align-items-center">
-                        <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-primary mb-1">
-                                Material #{{ material.pk }}</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ material.description }}</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800"><a href="{% url 'core:dowload_material' material.pk %}">Descargar</a></div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800"><a href="{% url 'core:delete_material' material.pk %}">Borrar</a></div>
-                        </div>
-                        <div class="col-auto">
-                            <i class="fas fa-calendar fa-2x text-gray-300"></i>
-                        </div>
-                    </div>
+                    <a href="{% url 'core:upload_material' %}"><button type="button" class="btn btn-primary btn-sm">Subir Material</button></a>
                 </div>
             </div>
         </div>
-    
-    
-    
+    </div>
+
+
+    <div class="row">
+        {% for material in event.material_set.all %}
+        
+            <div class="col-xl-3 col-md-6 mb-4">
+                <div class="card border-left-primary shadow h-100 py-2">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-primary mb-1">
+                                    Material #{{ material.pk }}</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">{{ material.description }}</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800"><a href="{% url 'core:dowload_material' material.pk %}">Descargar</a></div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800"><a href="{% url 'core:delete_material' material.pk %}">Borrar</a></div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>    
     {% endfor %}
     </div>
     
+</div>
 
 
 
@@ -215,6 +213,7 @@
     
     
     {% endfor %}
-    </div>
+</div>
+</div>
 
 {% endblock body %}
