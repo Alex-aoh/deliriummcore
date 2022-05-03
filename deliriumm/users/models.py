@@ -6,6 +6,9 @@ from django.contrib.auth.models import User
 # User class
 class UserCore(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
+    phonenum = models.CharField(verbose_name="Numero de Cel", blank=True, max_length=16)
+    instagram = models.CharField(verbose_name="Instagram Username", blank=True, max_length=50)
+
     
     class Meta:
          
