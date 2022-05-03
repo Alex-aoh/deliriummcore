@@ -24,6 +24,7 @@ urlpatterns = [
     path("core/", include("core.urls")),
     path("", include("mainpage.urls")),
     path("core/tickets/", include("tickets.urls")),
+    path("api/", include("api.urls")),
 ]
 
 if settings.DEBUG:

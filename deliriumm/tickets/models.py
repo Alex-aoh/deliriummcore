@@ -50,6 +50,8 @@ class TicketRequest(models.Model):
         default='PE',
     )
 
+    
+
     def __str__(self):
         return "#" + str(self.pk) + " - " + self.user.username + " " + self.status 
 
@@ -67,6 +69,8 @@ class Ticket(models.Model):
 
     status_export = models.BooleanField(default=True)
 
+    use = models.BooleanField(default=False)
+    
     def __str__(self):
         return "%s %s" % (self.hash, self.ticketrequest.pk)
 
