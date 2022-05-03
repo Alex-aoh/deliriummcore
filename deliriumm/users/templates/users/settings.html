@@ -26,7 +26,7 @@
   </div>
   <div class="input-group mb-3">
     <span class="input-group-text" id="basic-addon1">Email</span>
-    <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value="{{ user.email }}">
+    <input type="email" name="email" class="form-control" placeholder="example@example.com"id="exampleInputEmail1" aria-describedby="emailHelp" value="{{ user.email }}">
   </div>
   
   <div class="input-group mb-3">
@@ -37,6 +37,14 @@
   <div class="input-group mb-3">
     <span class="input-group-text" id="basic-addon1">Apellidos</span>
     <input type="text" name="last_name" class="form-control" placeholder="Apellidos" aria-label="Apellidos" aria-describedby="basic-addon1" value="{{ user.last_name }}">
+  </div>
+  <div class="input-group mb-3">
+    <span class="input-group-text" id="basic-addon1">Teléfono</span>
+    <input type="text" name="phonenum" class="form-control" placeholder="Teléfono" aria-label="Teléfono" aria-describedby="basic-addon1" value="{{ user.usercore.phonenum }}">
+  </div>
+  <div class="input-group mb-3">
+    <span class="input-group-text" id="basic-addon1">@</span>
+    <input type="text" name="instagram" class="form-control" placeholder="Instagram" aria-label="Instagram" aria-describedby="basic-addon1" value="{{ user.usercore.instagram }}">
   </div>
 
   <button type="submit" class="btn btn-primary text-center">Guardar</button>

@@ -96,6 +96,10 @@ def settings(request):
             request.user.last_name = request.POST['last_name']
         if request.POST.get('email', False):   
             request.user.email = request.POST['email']
+        if request.POST.get('phonenum', False):   
+            request.user.usercore.phonenum = request.POST['phonenum']
+        if request.POST.get('instagram', False):   
+            request.user.usercore.instagram = request.POST['instagram']
         user.save()
         return render(request, "users/settings.html", {
             "user": request.user,
