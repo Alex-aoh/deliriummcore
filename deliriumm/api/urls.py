@@ -7,6 +7,8 @@ app_name = "api"
 
 router = routers.DefaultRouter()
 router.register(r'ticket', views.TicketViewSet)
+router.register(r'ticketrequest', views.TicketRequestViewSet)
+
 urlpatterns = [
     path('', include(router.urls)),
     path('api-auth/', include('rest_framework.urls'))

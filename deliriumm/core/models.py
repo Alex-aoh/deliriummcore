@@ -1,6 +1,6 @@
 from asyncio import events
 from django.db import models
-
+from django.contrib.auth.models import User
 # Create your models here.
 
 class Event(models.Model):
@@ -29,3 +29,12 @@ class Material(models.Model):
     description = models.CharField(max_length=200)
     file = models.FileField(verbose_name="Archivo", upload_to='uploads/materials/', blank=True)
     event = models.ForeignKey(Event, on_delete=models.CASCADE)
+
+class Task(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now=True)
+    finish = models.BooleanField(default=False)
+    description = models.CharField(max_length=300, blank=True)
+    file1 = models.FileField(upload_to='uploads/tasks/')
+    file2 = models.FileField(upload_to='uploads/tasks/')
+    file3 = models.FileField(upload_to='uploads/tasks/')
