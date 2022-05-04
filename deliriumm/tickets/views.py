@@ -14,7 +14,6 @@ from hashlib import md5, sha256
 import imgkit
 from django.conf import settings
 
-from pyppeteer import launch
 
 # Create your views here.
 
