@@ -14,6 +14,8 @@ from hashlib import md5, sha256
 import imgkit
 from django.conf import settings
 
+from pyppeteer import launch
+
 # Create your views here.
 
 # -- MAIN --
@@ -253,7 +255,7 @@ def aprobar_request(request, requestid):
                 ticketnew.save()
                 #export html
                 #options={'xvfb': ''}
-                imgkit.from_url('52.2.78.204:80/core/tickets/t/export/' + hash, settings.MEDIA_ROOT + "tickets/" + hash +'.jpg', options={'xvfb': ''})
+                imgkit.from_url('0.0.0.0/core/tickets/t/export/' + hash, settings.MEDIA_ROOT + "tickets/" + hash +'.jpg', options={'xvfb': ''})
 
 
 
