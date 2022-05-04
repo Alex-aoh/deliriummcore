@@ -100,7 +100,7 @@ def settings(request):
             request.user.usercore.phonenum = request.POST['phonenum']
         if request.POST.get('instagram', False):   
             request.user.usercore.instagram = request.POST['instagram']
-        request.usercore.save()
+        request.user.usercore.save()
         user.save()
         return render(request, "users/settings.html", {
             "user": request.user,
