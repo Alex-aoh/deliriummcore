@@ -40,7 +40,7 @@ def my_tickets(request):
         return HttpResponseRedirect(reverse("users:login"))
     usercore = get_object_or_404(UserCore, user=request.user)
     return render(request, "tickets/my_tickets.html",{
-        "tickets": request.user.ticket_set.all(),
+        "tickets": Ticket.objects.filter(user=request.user),
     })
 #--------------------------------------------------------------------
 
