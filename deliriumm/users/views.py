@@ -50,7 +50,12 @@ def register(request):
     
     if request.POST:
         if request.POST.get('token', False):
-            token = get_object_or_404(RegToken, token=request.POST.get('token', False))
+            try:
+                token = RegToken.objects.get(token=request.POST.get('token', False))
+            except(BaseException):
+                return render(request, "users/token_register.html", {
+                    "message": "Token Invalido"
+        })
             username = token.username
             token.delete()
             form = UserCreationForm()
@@ -75,7 +80,9 @@ def register(request):
                 my_group = Group.objects.get(name='Rp') 
                 my_group.user_set.add(user)
                 return redirect('core:index')
-    
+        return render(request, "users/token_register.html", {
+                    "message": "Token Invalido"
+        })
     else:
         return render(request, "users/token_register.html", {
         })
