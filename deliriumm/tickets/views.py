@@ -248,8 +248,8 @@ def aprobar_request(request, requestid):
             #NO HAY TICKETS CREADOS
             for t in range(ticketrequest.q_tickets):
                 
-                hash = hashTicket(event=ticketrequest.event.name, user=request.user.username, request=ticketrequest.pk,id=Ticket.objects.count())
-                ticketnew = Ticket(hash=hash, client=ticketrequest.client, ticketrequest=ticketrequest, user=request.user,
+                hash = hashTicket(event=ticketrequest.event.name, user=ticketrequest.user.username, request=ticketrequest.pk,id=Ticket.objects.count())
+                ticketnew = Ticket(hash=hash, client=ticketrequest.client, ticketrequest=ticketrequest, user=ticketrequest.user,
                 event=ticketrequest.event, price=ticketrequest.event.price, status_export = True)
                 ticketnew.save()
                 #export html

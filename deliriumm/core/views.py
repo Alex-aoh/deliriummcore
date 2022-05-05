@@ -155,9 +155,6 @@ def rps_cash_view(request):
         return HttpResponseRedirect(reverse("users:login"))
     usercore = get_object_or_404(UserCore, user=request.user)
 
-    # criterion1 = Q(payment_method="CASH") #any query you want
-    # criterion2 = Q(FID="id") #any query you want
-
     
 
     cashrequests_notpay = {}
