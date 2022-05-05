@@ -4,8 +4,9 @@ from django.conf import settings
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
-from django.contrib.auth.decorators import permission_required
-from tickets.models import TicketRequest
+from django.contrib.auth.models import User
+from tickets.models import Ticket, TicketRequest
+from django.db.models import Q
 
 from users.models import UserCore
 
@@ -140,8 +141,70 @@ def admin_view(request):
             "tickets_ar": TicketRequest.objects.filter(status="AR"),
             "event": Event.objects.get(status="VE"),
             "last_ticket": usercore.last_ticket_request_see,
+            "requests_cash": TicketRequest.objects.filter(Q(payment_method="CASH") &  Q(status="VA")),
         }) 
 
     else:
         return HttpResponseRedirect(reverse('users:login'))
 #--------------------------------------------------------------------
+
+
+#--------------------------------------------------------------------
+def rps_cash_view(request):
+    if not request.user.is_authenticated:
+        return HttpResponseRedirect(reverse("users:login"))
+    usercore = get_object_or_404(UserCore, user=request.user)
+
+    # criterion1 = Q(payment_method="CASH") #any query you want
+    # criterion2 = Q(FID="id") #any query you want
+
+    
+
+    cashrequests_notpay = {}
+
+    users = User.objects.all()
+
+    for user in users:
+        userrequestpay = []
+        username = user.username
+        ticketrequests = user.ticketrequest_set.all()
+        if ticketrequests:
+            for ticketrequest in ticketrequests:
+                if ticketrequest.payment_method == "CASH":
+                    if ticketrequest.cash_pay == False:
+                        userrequestpay.append(int(ticketrequest.pk))
+            cashrequests_notpay[username] = userrequestpay
+
+
+    # if keys & values:
+    #     for i in range(len(keys)):
+    #             cashrequests[keys[i]] = values[i]
+
+            
+    #         print(dicts)
+
+    #for users
+    ticketsallcash = TicketRequest.objects.filter(payment_method="CASH")
+    cashtotal = 0
+    ticketnotpay = ticketsallcash.filter(cash_pay=False)
+    cashnotpay = 0
+
+    for ticket in ticketsallcash:
+        cashtotal = cashtotal + ticket.total
+    for ticket in ticketnotpay:
+        cashnotpay = cashnotpay + ticket.total
+    
+
+    if request.user.has_perm('users.can_view_admin'):
+        return render(request, "core/admin/rps_cash.html", {
+            "event": Event.objects.get(status="VE"),
+            "last_ticket": usercore.last_ticket_request_see,
+            "cashrequests": cashrequests_notpay.items(),
+            "allrequests": TicketRequest.objects.all(),
+            "cashtotal": cashtotal,
+            "cashnotpay": cashnotpay,
+            "cashpay": cashtotal-cashnotpay,
+        }) 
+
+    else:
+        return HttpResponseRedirect(reverse('users:login'))

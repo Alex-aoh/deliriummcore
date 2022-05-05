@@ -20,4 +20,5 @@ urlpatterns = [
     path("a/<int:requestid>/re", views.rechazar_request, name="rechazar_request"),
     path("a/<int:requestid>/ar", views.archivar_request, name="archivar_request"),
     path("a/<int:requestid>/as", views.asignar_request, name="asignar_request"),
+    path("a/<int:requestid>/togglecash", views.toggleCash, name="togglecash"),
 ]

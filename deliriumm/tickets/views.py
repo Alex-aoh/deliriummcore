@@ -97,7 +97,7 @@ def ticketCreate(request, event, totalp):
     elif request.POST["payment_method"] == "CASH":
         t = TicketRequest(user=request.user, event=event, context=request.POST["context"], 
         q_tickets=int(request.POST["q_tickets"]), reference=request.POST["reference"], 
-        client=request.POST["client"], total=totalp, payment_method=request.POST["payment_method"])
+        client=request.POST["client"], total=totalp, payment_method=request.POST["payment_method"], cash_pay=False)
         return t
 
 def new_ticket_request(request):
@@ -328,3 +328,20 @@ def asignar_request(request, requestid):
         return HttpResponseRedirect(reverse("tickets:admin_request_view", args=(requestid,)))
     else:
         return HttpResponseRedirect(reverse("tickets:request_view", args=(requestid,)))
+
+def toggleCash(request, requestid):
+    if not request.user.is_authenticated:
+        return HttpResponseRedirect(reverse("users:login"))
+    if requestid == 0:
+        return HttpResponseRedirect(reverse("core:admin_view"))
+    ticketrequest = get_object_or_404(TicketRequest, pk=requestid)
+
+    if request.user.has_perm("users.can_view_admin"):
+
+        if ticketrequest.cash_pay == True:
+            ticketrequest.cash_pay = False
+        else:
+            ticketrequest.cash_pay = True 
+        ticketrequest.save()
+
+        return HttpResponseRedirect(reverse("core:admin_view"))

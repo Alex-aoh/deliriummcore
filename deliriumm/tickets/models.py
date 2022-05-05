@@ -37,6 +37,7 @@ class TicketRequest(models.Model):
         default='CASH',
     )
 
+    cash_pay = models.BooleanField(blank=True, default=False)
     
     STATUS = ( 
         ("PE", "Pendiente"), 
