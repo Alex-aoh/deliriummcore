@@ -80,6 +80,10 @@ def register(request):
                 my_group = Group.objects.get(name='Rp') 
                 my_group.user_set.add(user)
                 return redirect('core:index')
+            else:
+                return render(request, "users/register.html", {
+                    "message": "Error de registro!"
+        })
         return render(request, "users/token_register.html", {
                     "message": "Token Invalido"
         })
