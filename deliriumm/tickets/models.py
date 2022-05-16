@@ -59,7 +59,7 @@ class TicketRequest(models.Model):
 class Ticket(models.Model):
 
     hash = models.CharField(primary_key=True, verbose_name="Hash Id", max_length=200)
-    client = models.CharField(max_length=50)
+    client = models.CharField(max_length=50, default="none")
     ticketrequest = models.ForeignKey(TicketRequest, on_delete=models.CASCADE)
 
 
