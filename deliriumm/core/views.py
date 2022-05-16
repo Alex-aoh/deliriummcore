@@ -167,7 +167,7 @@ def rps_cash_view(request):
         ticketrequests = user.ticketrequest_set.all()
         if ticketrequests:
             for ticketrequest in ticketrequests:
-                if ticketrequest.payment_method == "CASH":
+                if ticketrequest.payment_method == "CASH" & ticketrequest.status == "VA":
                     if ticketrequest.cash_pay == False:
                         userrequestpay.append(int(ticketrequest.pk))
             cashrequests_notpay[username] = userrequestpay
