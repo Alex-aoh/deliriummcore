@@ -171,7 +171,8 @@ def rps_cash_view(request):
                     if ticketrequest.status == "VA":
                         if ticketrequest.cash_pay == False:
                             userrequestpay.append(int(ticketrequest.pk))
-            cashrequests_notpay[username] = userrequestpay
+                            cashrequests_notpay[username] = userrequestpay
+            
 
 
     # if keys & values:
