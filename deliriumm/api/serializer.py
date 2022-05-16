@@ -9,4 +9,4 @@ class TicketSerializer(serializers.ModelSerializer):
 class TicketRequestSerializer(serializers.ModelSerializer):
     class Meta:
         model = TicketRequest
-        fields = ['user', 'event', 'context', 'q_tickets']
+        fields = ['pk', 'user', 'event', 'context', 'q_tickets']
