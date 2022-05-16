@@ -181,7 +181,7 @@ def rps_cash_view(request):
     #         print(dicts)
 
     #for users
-    ticketsallcash = TicketRequest.objects.filter(payment_method="CASH")
+    ticketsallcash = TicketRequest.objects.filter(Q(payment_method="CASH") &  Q(status="VA"))
     cashtotal = 0
     ticketnotpay = ticketsallcash.filter(cash_pay=False)
     cashnotpay = 0
