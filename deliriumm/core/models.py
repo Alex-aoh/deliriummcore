@@ -1,4 +1,6 @@
 from asyncio import events
+from pydoc import describe
+from tkinter import CASCADE
 from django.db import models
 from django.contrib.auth.models import User
 # Create your models here.
@@ -25,6 +27,7 @@ class Event(models.Model):
     def __str__(self):
         return str(self.pk) + " - " + self.name
 
+
 class Material(models.Model):
     description = models.CharField(max_length=200)
     file = models.FileField(verbose_name="Archivo", upload_to='uploads/materials/', blank=True)
@@ -38,3 +41,35 @@ class Task(models.Model):
     file1 = models.FileField(upload_to='uploads/tasks/')
     file2 = models.FileField(upload_to='uploads/tasks/')
     file3 = models.FileField(upload_to='uploads/tasks/')
+
+
+class EventAccount(models.Model):
+    username = models.CharField(max_length=100, blank=True)
+    name = models.CharField(max_length=100, blank=True)
+    password = models.CharField(max_length=100, blank=True)
+    
+class EventSell(models.Model):
+    eventaccount = models.ForeignKey(EventAccount, on_delete=models.CASCADE)
+    total = models.IntegerField(blank=True, default=0)
+    datetime = models.DateTimeField(auto_now=True)
+
+
+class EventItemType(models.Model):
+    name = models.CharField(max_length=100, blank=False)
+    description = models.CharField(max_length=200, blank=True)
+    price = models.IntegerField(blank=False)
+
+    def __str__(self):
+        return str(self.pk) + " - " + self.name
+
+class EventItem(models.Model):
+    type = models.ForeignKey(EventItemType, on_delete=models.CASCADE)
+    eventsell = models.ForeignKey(EventSell, on_delete=models.CASCADE)
+    
+
+
+
+
+
+
+

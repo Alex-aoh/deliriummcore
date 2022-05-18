@@ -1,5 +1,5 @@
 from django.contrib import admin
-from core.models import Event
+from core.models import Event, EventAccount, EventItemType, EventItem, EventSell
 from .models import Material
 from users.models import RegToken
 from users.models import UserCore
@@ -14,3 +14,7 @@ admin.site.register(Ticket)
 admin.site.register(RegToken)
 admin.site.register(CommentTicketRequest)
 admin.site.register(Material)
+admin.site.register(EventAccount)
+admin.site.register(EventItemType)
+admin.site.register(EventItem)
+admin.site.register(EventSell)

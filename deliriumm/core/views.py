@@ -133,6 +133,10 @@ def admin_view(request):
     if not request.user.is_authenticated:
         return HttpResponseRedirect(reverse("users:login"))
     usercore = get_object_or_404(UserCore, user=request.user)
+    ticketsbank = TicketRequest.objects.filter(Q(payment_method="CARD") | Q(payment_method="TRANSFER") | Q(payment_method="DEPOSIT") & Q(status="VA"))
+    totalbank = 0
+    for ticket in ticketsbank:
+        totalbank = totalbank + ticket.total
     if request.user.has_perm('users.can_view_admin'):
         return render(request, "core/admin/index.html", {
             "tickets_pe": TicketRequest.objects.filter(status="PE"),
@@ -142,6 +146,8 @@ def admin_view(request):
             "event": Event.objects.get(status="VE"),
             "last_ticket": usercore.last_ticket_request_see,
             "requests_cash": TicketRequest.objects.filter(Q(payment_method="CASH") &  Q(status="VA")),
+            "total_bank": totalbank
+            
         }) 
 
     else:
@@ -207,3 +213,5 @@ def rps_cash_view(request):
 
     else:
         return HttpResponseRedirect(reverse('users:login'))
+
+
