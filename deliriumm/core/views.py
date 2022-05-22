@@ -233,7 +233,7 @@ def alltickets(request):
     if request.user.has_perm('users.can_view_admin'):
         return render(request, "core/admin/alltickets.html", {
             "event": Event.objects.get(status="VE"),
-            "rp_alltickets": rp_alltickets
+            "rp_alltickets": rp_alltickets.items()
         }) 
 
     else:
