@@ -30,7 +30,7 @@
     </div>
 
 
-    {% for key, value in alltickets %}
+    {% for key, value in rp_alltickets %}
 
     <div class="container p-3">
         <h4>@{{ key }} | <span>{{ value }}</span></h4>
@@ -40,11 +40,6 @@
         
         
     {% endfor %}
-    <div class="container p-3">
-        <h5>Total Cash: {{ cashtotal }}</h5>
-        <h5>Total Pagado: {{ cashpay }}</h5>
-        <h5>Total No Pagado: {{ cashnotpay }}</h5>
-    </div>
 </div>
 
 
