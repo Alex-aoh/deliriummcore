@@ -215,3 +215,26 @@ def rps_cash_view(request):
         return HttpResponseRedirect(reverse('users:login'))
 
 
+def alltickets(request):
+    if not request.user.is_authenticated:
+        return HttpResponseRedirect(reverse("users:login"))
+    usercore = get_object_or_404(UserCore, user=request.user)
+
+    rp_alltickets = {}
+
+    users = User.objects.all()
+
+    for user in users:
+        tickets = user.ticket_set.all()
+        countu = tickets.count()
+        rp_alltickets[user.username] = countu
+
+
+    if request.user.has_perm('users.can_view_admin'):
+        return render(request, "core/admin/alltickets.html", {
+            "event": Event.objects.get(status="VE"),
+            "rp_alltickets": rp_alltickets
+        }) 
+
+    else:
+        return HttpResponseRedirect(reverse('users:login'))

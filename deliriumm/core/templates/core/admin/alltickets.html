@@ -1,0 +1,56 @@
+{% extends 'core/layout_1.html' %}
+
+{% block head %}
+{% load static %}
+
+<title>Admin - Deliriumm Core</title>
+
+{% endblock %}
+
+{% block body %}
+
+<h1>Admin</h1>
+
+<div class="card mb-4">
+    <!-- Card Header -->
+    <div class="card-header py-3">
+        <div class="row justify-content-between">
+            <div class="col-xl-4 col-md-6">
+                <div class="text-xs font-weight-bold text-primary mb-1">
+                    Ventas PR
+                </div>
+            </div>
+
+            <div class="col-xl-3 col-md-6">
+                <div class="text-end ">
+                    <a href="{% url 'core:admin_view' %}"><button type="button" class="btn btn-primary btn-sm">Regresar</button></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    {% for key, value in alltickets %}
+
+    <div class="container p-3">
+        <h4>@{{ key }} | <span>{{ value }}</span></h4>
+    </div>
+    
+
+        
+        
+    {% endfor %}
+    <div class="container p-3">
+        <h5>Total Cash: {{ cashtotal }}</h5>
+        <h5>Total Pagado: {{ cashpay }}</h5>
+        <h5>Total No Pagado: {{ cashnotpay }}</h5>
+    </div>
+</div>
+
+
+
+
+{% endblock body %}
+
+
+
